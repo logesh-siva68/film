@@ -1,15 +1,16 @@
 const pgpLib = require('pg-promise')
 const monitor = require('pg-monitor')
 const promise = require('bluebird')
+const logger = require('../utils/logger')
 
+let ssl = {rejectUnauthorized: false}
 // db config
 const pgconfig = {
-  host: process.env.PGHOST,
-  port: process.env.PGPORT,
-  database: process.env.PGDB,
-  user: process.env.PGUSERNAME,
-  password: process.env.PGPASSWORD
+  connectionString: process.env.DBCS,
+   max: 30,
+   ssl:ssl
 }
+logger.info("pg cres------->", pgconfig)
 
 const options = {
   promiseLib: promise

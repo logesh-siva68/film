@@ -3,7 +3,7 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     name TEXT,
     address JSON,
-    email TEXT,
+    email TEXT UNIQUE NOT NULL,
     password TEXT,
     status CHARACTER VARYING(1) DEFAULT 'A',
     added_by numeric DEFAULT 1,
