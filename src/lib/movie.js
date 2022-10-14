@@ -23,10 +23,36 @@ ex.validateAddMovie = async(req)=>{
     return schema
 }
 
+
+
 ex.getMovies = async(req,res)=>{
      try{
         res.status(201).json({"status":"ok", result:await db.getMovies()})
     }catch(err){
         res.status(err.httpStatusCode || 500).json({status:'error', error: err.message || "internal server error"})
     }
+}
+
+
+ex.updateMovie = async(req,res)=>{
+    try{
+        await db.updateMovie(req.body, req.user);
+        res.status(201).json({"status":"ok", result:"Movie updated!"})
+    }catch(err){
+        res.status(err.httpStatusCode || 500).json({status:'error', error: err.message || "internal server error"})
+    }
+}
+
+
+ex.validateUpdateMovie = async(req)=>{
+    const schema = Joi.object({
+        id: Joi.number().required(),
+        name : Joi.string().required(),
+        rating: Joi.number(),
+        casts:Joi.array().required(),
+        genre:Joi.string(),
+        releaseDate:Joi.date(),
+        token: Joi.string().required()
+    }).validate(req.body, {allowUnknown:true})
+    return schema
 }
