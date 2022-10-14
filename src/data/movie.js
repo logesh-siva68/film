@@ -13,7 +13,7 @@ ex.addMovie = async(body, user)=>{
             JSON.stringify(body.casts) || null,
             body.genre,
             body.releaseDate,
-            user.id
+             1
         ])
     }catch(err){
         throw Error(err)
@@ -22,7 +22,7 @@ ex.addMovie = async(body, user)=>{
 
 ex.getMovies = async()=>{
     try{
-        return await db.any('select * from movies');
+        return await db.any(`Select name, rating, casts, genre, release_date , id from movies`);
     }catch(err){
         throw Error(err)
     }

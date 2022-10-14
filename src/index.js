@@ -1,12 +1,12 @@
 const express = require('express')
 const logger = require('./utils/logger')
 const app = express()
+const cors = require('cors')
 require('dotenv').config()
 const port = process.env.PORT || 3001
 
+app.use(cors())
 
-
-require('dotenv')
 app.use(express.json({ limit: 500 }))
 app.use(express.urlencoded({ extended: true }))
 

@@ -1,0 +1,32 @@
+<div class="hdr"><h2><i class="bi bi-camera-reels-fill"></i> Movies Data</h2>
+<button class="btn btn-danger btn-sm" type="button" (click)="logout()">Logout</button>
+</div>
+<div class="table-responsive">
+  <div class="text-end"><a routerLink="/add-movie" class="btn btn-sm btn-primary">Add</a></div>
+  <table class="table">
+    <thead>
+      <tr>
+        <th class="text-center">Name</th>
+        <th class="text-center">Rating</th>
+        <th class="text-center">Casts</th>
+        <th class="text-center">Genre</th>
+        <th class="text-center">Release Date</th>
+        <th class="text-center">Controls</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of moives;  index as i">
+          <td class="text-center">{{item.name | titlecase}}</td>
+          <td class="text-center">{{item.rating}}</td>
+          <td class="text-center">{{item.casts.join(', ') | titlecase}}</td>
+          <td class="text-center">{{item.genre | titlecase}}</td>
+          <td class="text-center">{{item.release_date | date}}</td>
+          <td class="text-center">
+            <p class="btn-container">
+              <a [routerLink]="['/edit-movie',item.id]" class="btn btn-sm btn-primary"><i class="bi bi-pencil-fill"></i></a>
+              <button class="btn btn-sm btn-danger"><i class="bi bi-trash2-fill"></i></button></p>
+          </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

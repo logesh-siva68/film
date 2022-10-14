@@ -4,6 +4,8 @@ const db = require('../data/user')
 const hash = require('../utils/hash')
 const jwt = require('../utils/jwt')
 const config  =require('../config')
+const logger = require('../utils/logger')
+const { array } = require('joi')
 
 ex.login = async (req, res) => {
 
@@ -12,8 +14,9 @@ ex.login = async (req, res) => {
     if(getUser.isAuthUser){
       const token = await jwt.createToken(getUser.data,  config.jwtUserSec, '3h')
       res.status(200).json({status:'ok', result:{token:token, ...getUser.data}})
-    } else throw "somwthing wrong"
+    } else throw Error("Wrong Password")
   }catch(err){
+    logger.error(err)
     res.status(err.httpStatusCode || 500).json({status:'error', error: err.message || "internal server error"})
   }
   
@@ -50,6 +53,8 @@ ex.registerValidate = (req) => {
 async function verifyUser(user){
   try{
     let getUser = await db.getUserByEmail(user.email);
+    if(!(Array.isArray(getUser) && getUser.length))
+    throw Error("User not registed")
   if(getUser && await hash.checkHashedStr(user.password, getUser[0].password)){
     delete getUser[0].password;
     return {data: getUser[0], isAuthUser: true}
