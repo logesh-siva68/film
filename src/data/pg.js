@@ -10,7 +10,7 @@ const pgconfig = {
    max: 30,
    ssl:ssl
 }
-logger.info("pg cres------->", pgconfig)
+
 
 const options = {
   promiseLib: promise

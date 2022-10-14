@@ -13,9 +13,9 @@ ex.hashStr = async (str) => {
   }
 }
 
-ex.checkHashedStr = async (hash) => {
+ex.checkHashedStr = async (str,hash) => {
   try {
-    return await bcrypt.compare(hash)
+    return await bcrypt.compare(str, hash)
   } catch (err) {
     throw Error(err)
   }
