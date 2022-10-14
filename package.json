@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "lint": "standard",
-    "lint-fix": "standard --fix"
+    "lint-fix": "standard --fix",
+    "start": "node src/index"
   },
   "author": "Logesh",
   "license": "ISC",
