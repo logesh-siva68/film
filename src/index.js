@@ -9,7 +9,9 @@ app.use(cors())
 
 app.use(express.json({ limit: 500 }))
 app.use(express.urlencoded({ extended: true }))
-
+app.use('/',(req,res)=>{
+  res.status(200).json({"status":"health", data:"up"})
+})
 app.use('/api', require('./routes'))
 
 app.use('*', (req, res) => {
