@@ -20,7 +20,7 @@ export class AuthService {
 
   isAuth(){
     const token = localStorage.getItem('token')
-    if(token === 'null') this.isLogin.next('N')
+    if(token === 'null' || !token) this.isLogin.next('N')
     else this.isLogin.next('Y')
     return this.isLogin.value;
   }

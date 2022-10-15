@@ -44,7 +44,14 @@ export class MovieService {
       )
 
   }
+  deleteMovie(id:any){
+    const token = localStorage.getItem('token') || ""
+    let _params = new HttpParams()
+    _params = _params.append('id',id)
+    _params = _params.append('token',token)
 
+    return this._http.delete(this.apiBaseUrl+'/movies', {params : _params})
+  }
 
 
 }

@@ -11,6 +11,7 @@ router.use('*',authUser)
 router.post('/add-movie', schemaValidation(movie.validateAddMovie), movie.addMovie)
 router.put('/update-movie', schemaValidation(movie.validateUpdateMovie), movie.updateMovie)
 router.get('/movies',movie.getMovies)
+router.delete('/movies', schemaValidation(movie.validateDelete), movie.delete)
 
 
 async function authUser(req,res,next){

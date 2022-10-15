@@ -68,3 +68,22 @@ ex.validateUpdateMovie = (req)=>{
     }).validate(req.body, {allowUnknown:true})
     return schema
 }
+
+
+ex.delete = async(req,res)=>{
+    try{
+        await db.delete(req.query.id);
+        res.status(201).json({"status":"ok", result:"Movie updated!"})
+    }catch(err){
+        console.log(err)
+        res.status(err.httpStatusCode || 500).json({status:'error', error: err.message || "internal server error"})
+    }
+}
+
+
+ex.validateDelete = (req)=>{
+    const schema = JOI.object({
+        id: JOI.number().required()
+    }).validate(req.query, {allowUnknown:true})
+    return schema
+}

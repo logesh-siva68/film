@@ -13,7 +13,7 @@ ex.addMovie = async(body, user)=>{
             JSON.stringify(body.casts) || null,
             body.genre,
             body.releaseDate,
-             1
+            user.id
         ])
     }catch(err){
         throw Error(err)
@@ -44,6 +44,13 @@ ex.updateMovie = async(body, user)=>{
             body.releaseDate,
             user.id
         ])
+    }catch(err){
+        throw Error(err)
+    }
+}
+ex.delete = async(id)=>{
+    try{
+        return await db.any('delete from movies where id = $1', [id])
     }catch(err){
         throw Error(err)
     }
